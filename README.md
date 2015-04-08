@@ -1,12 +1,19 @@
-# TracedNeighbors
+TracedNeighbors
+=====
 
 
-In ./build
+## Installation
 
-cmake ..
-make -j4
-src/TraceHBonds
+```bash
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make -j4
+$ src/TraceHBonds
+```
 
 To cross-compile, use:
-  cmake -DCMAKE_TOOLCHAIN_FILE=<Toolchain cmake file> ..
+```bash
+$ cmake -DCMAKE_TOOLCHAIN_FILE=<Toolchain cmake file> ..
+```
 
