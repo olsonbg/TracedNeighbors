@@ -1,0 +1,7 @@
+#In build:
+
+src/TracedNeighbors -p ../../TraceHBonds/examples/mns/Traced01/HBonds -s .dat.bz2 -f 1 -l 1000 >output.txt
+
+# Check with.
+
+diff ../../TraceHBonds/examples/mns/neighbors.txt output.txt
