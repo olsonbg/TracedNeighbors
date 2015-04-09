@@ -55,11 +55,18 @@ As an example, a few lines from a data file follows.
 
 ## Output format
 
-The output is tab delimited text which includes 3 different tables. The output can be redirected to a text file, and should be easy to import into any spredsheet. 
+The output is tab delimited text which includes 3 different tables. The output
+can be redirected to a text file, and should be easy to import into any
+spredsheet.
 
 ### First Table
 
-The first table has a Count, Average, and StdDev column for each file imported, so the table can have many columns if many data files are read. It's not uncommon to read 100, 1000, or more data files. The first table output from the [example data](#data-file-format) is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and [table two](#second-table), turn out to be the same.
+The first table has a Count, Average, and StdDev column for each file imported,
+so the table can have many columns if many data files are read. It's not
+uncommon to read 100, 1000, or more data files. The first table output from the
+[example data](#data-file-format) is shown below, in table format for easy
+viewing. **Note**: Only one (1) data file is read, so this table, and
+[table two](#second-table), turn out to be the same.
 
 #### Oxygen neighbor distances. n.n. = Nearest neighbor
 
@@ -78,7 +85,11 @@ The first table has a Count, Average, and StdDev column for each file imported, 
 
 ### Second Table
 
-The second table combines the data from all the imported files into single Count, Average, StdDev columns. The second table output from the [example data](#data-file-format) is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and [table one](#first-table) above, turn out to be the same.
+The second table combines the data from all the imported files into single
+Count, Average, StdDev columns. The second table output from the
+[example data](#data-file-format) is shown below, in table format for easy
+viewing.  **Note**: Only one (1) data file is read, so this table, and
+[table one](#first-table) above, turn out to be the same.
 
 #### Combining all files:
 
@@ -95,9 +106,12 @@ The second table combines the data from all the imported files into single Count
 |               |    3     |2     |  7.67215|0.774919|
 |               |    4     |1     |  10.1163|       0|
 
-### Third Table 
+### Third Table
 
-The Third table combines all files as in table two, and also all the 'Atoms in chain' columns for a complete nearest neighbor table. The third table output from the [example data](#data-file-format) is shown below, in table format for easy viewing.
+The Third table combines all files as in table two, and also all the 'Atoms in
+chain' columns for a complete nearest neighbor table. The third table output
+from the [example data](#data-file-format) is shown below, in table format for
+easy viewing.
 
 ####Combining all files and Chains:
 
@@ -107,6 +121,4 @@ The Third table combines all files as in table two, and also all the 'Atoms in c
 |2          |   3   |5.55041  |0.959413|
 |3          |   2   |7.67215  |0       |
 |4          |   1   |10.1163  |0       |
-
-
 
