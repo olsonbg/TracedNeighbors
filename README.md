@@ -53,3 +53,60 @@ As an example, a few lines from a data file follows.
 # Chain end-to-end distance: 10.1163
 ```
 
+## Output format
+
+The output is tab delimited text which includes 3 different tables. The output can be redirected to a text file, and should be easy to import into any spredsheet. 
+
+### First Table
+
+The first table has a Count, Average, and StdDev column for each file imported, so the table can have many columns if many data files are read. It's not uncommon to read 100, 1000, or more data files. The first table output from the example data above, is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and table two below, turn out to be the same.
+
+#### Oxygen neighbor distances. n.n. = Nearest neighbor
+
+|Atoms in chain | Nth n.n. |Count |Average  |StdDev  |
+|:--------------|:--------:|:----:|--------:|-------:|
+|3              |    1     |  1   | 2.53131 |       0|
+|5              |    1     |  0   |       0 |       0|
+|               |    2     |  0   |       0 |       0|
+|7              |    1     |  0   |       0 |       0|
+|               |    2     |  0   |       0 |       0|
+|               |    3     |  0   |       0 |       0|
+|9              |    1     |  4   |  2.92945|0.369107|
+|               |    2     |  3   |  5.55041|0.678408|
+|               |    3     |  2   |  7.67215|0.774919|
+|               |    4     |  1   |  10.1163|       0|
+
+### Second Table
+
+The second table combines the data from all the imported files into single Count, Average, StdDev columns. The second table output from the example data above is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and table one above, turn out to be the same.
+
+#### Combining all files:
+
+|Atoms in chain | Nth n.n. | Count|  Average|StdDev  |
+|:--------------|:--------:|:----:|--------:|-------:|
+|3              |    1     |   1  |  2.53131|       0|
+|5              |    1     |   0  |     0   |       0|
+|               |    2     |   0  |     0   |       0|
+|7              |    1     |   0  |     0   |       0|
+|               |    2     |   0  |     0   |       0|
+|               |    3     |   0  |     0   |       0|
+|9              |    1     |4     |  2.92945|0.369107|
+|               |    2     |3     |  5.55041|0.678408|
+|               |    3     |2     |  7.67215|0.774919|
+|               |    4     |1     |  10.1163|       0|
+
+### Third Table 
+
+The Third table combines all files as in table two, and also all the 'Atoms in chain' columns for a complete nearest neighbor table. The third table output from the example data above is shown below, in table format for easy viewing.
+
+####Combining all files and Chains:
+
+|Nth n.n.   | Count | Average |StdDev  |
+|:----------|:-----:|--------:|-------:|
+|1          |   5   |2.84983  |0.422505|
+|2          |   3   |5.55041  |0.959413|
+|3          |   2   |7.67215  |0       |
+|4          |   1   |10.1163  |0       |
+
+
+
