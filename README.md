@@ -59,7 +59,7 @@ The output is tab delimited text which includes 3 different tables. The output c
 
 ### First Table
 
-The first table has a Count, Average, and StdDev column for each file imported, so the table can have many columns if many data files are read. It's not uncommon to read 100, 1000, or more data files. The first table output from the example data above, is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and table two below, turn out to be the same.
+The first table has a Count, Average, and StdDev column for each file imported, so the table can have many columns if many data files are read. It's not uncommon to read 100, 1000, or more data files. The first table output from the [example data](#data-file-format) is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and [table two](#second-table), turn out to be the same.
 
 #### Oxygen neighbor distances. n.n. = Nearest neighbor
 
@@ -78,7 +78,7 @@ The first table has a Count, Average, and StdDev column for each file imported, 
 
 ### Second Table
 
-The second table combines the data from all the imported files into single Count, Average, StdDev columns. The second table output from the example data above is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and table one above, turn out to be the same.
+The second table combines the data from all the imported files into single Count, Average, StdDev columns. The second table output from the [example data](#data-file-format) is shown below, in table format for easy viewing. **Note**: Only one (1) data file is read, so this table, and [table one](#first-table) above, turn out to be the same.
 
 #### Combining all files:
 
@@ -97,7 +97,7 @@ The second table combines the data from all the imported files into single Count
 
 ### Third Table 
 
-The Third table combines all files as in table two, and also all the 'Atoms in chain' columns for a complete nearest neighbor table. The third table output from the example data above is shown below, in table format for easy viewing.
+The Third table combines all files as in table two, and also all the 'Atoms in chain' columns for a complete nearest neighbor table. The third table output from the [example data](#data-file-format) is shown below, in table format for easy viewing.
 
 ####Combining all files and Chains:
 
