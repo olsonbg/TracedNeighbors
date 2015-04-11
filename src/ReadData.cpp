@@ -107,9 +107,18 @@ int ReadData( const char *filename,
 				 */
 				if ( (Ox->size() != 0) && (NEWCHAIN) )
 				{
-					Ox->push_back(ENDOFCHAINMARKER);
-					Oy->push_back(ENDOFCHAINMARKER);
-					Oz->push_back(ENDOFCHAINMARKER);
+					try
+					{
+						Ox->push_back(ENDOFCHAINMARKER);
+						Oy->push_back(ENDOFCHAINMARKER);
+						Oz->push_back(ENDOFCHAINMARKER);
+					}
+					catch( std::exception const &e)
+					{
+						std::cout << "Exception: " << e.what();
+						std::cout << ". Ran out of memory?" << std::endl;
+						return 1;
+					}
 				}
 
 				//We have a chain, so set NEWCHAIN to false.
@@ -118,9 +127,18 @@ int ReadData( const char *filename,
 				// We are only interested in Oxygen atoms
 				if (strncmp( atom, "[O]", 3 ) == 0)
 				{
-					Ox->push_back(X);
-					Oy->push_back(Y);
-					Oz->push_back(Z);
+					try
+					{
+						Ox->push_back(X);
+						Oy->push_back(Y);
+						Oz->push_back(Z);
+					}
+					catch( std::exception const &e)
+					{
+						std::cout << "Exception: " << e.what();
+						std::cout << ". Ran out of memory?" << std::endl;
+						return 1;
+					}
 				}
 			}
 			// A blank line indicates a new chain, set the flag.
@@ -150,11 +168,20 @@ int ReadData( const char *filename,
 		 (Oy->size() != 0)     &&
 		 (Oz->size() != 0)    )
 	{
-		Ox->push_back(ENDOFCHAINMARKER);
-		Oy->push_back(ENDOFCHAINMARKER);
-		Oz->push_back(ENDOFCHAINMARKER);
+		try
+		{
+			Ox->push_back(ENDOFCHAINMARKER);
+			Oy->push_back(ENDOFCHAINMARKER);
+			Oz->push_back(ENDOFCHAINMARKER);
+		}
+		catch( std::exception const &e)
+		{
+			std::cout << "Exception: " << e.what();
+			std::cout << ". Ran out of memory?" << std::endl;
+			return 1;
+		}
 	}
 
 	return(0);
 }
-// vim:tw=76:ts=4:sw=2
+// vim:tw=76:ts=4:sw=4

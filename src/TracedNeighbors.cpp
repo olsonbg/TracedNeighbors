@@ -11,6 +11,8 @@
 #include "ReadData.h"
 
 int doAllFrames(char *, char *fprefix, char *fsuffix, int first, int last);
+
+
 // Use CLidx to convert length to ChainLength index number.
 inline unsigned int CLidx( unsigned int length )
 {
@@ -18,7 +20,7 @@ inline unsigned int CLidx( unsigned int length )
 }
 
 // Allocate ChainLength for a chain length of 'length' atoms
-void alloc_chains(std::vector<struct s_ChainLength> *ChainLength,
+bool alloc_chains(std::vector<struct s_ChainLength> *ChainLength,
                  unsigned int length)
 {
 	/*
@@ -36,9 +38,30 @@ void alloc_chains(std::vector<struct s_ChainLength> *ChainLength,
 	{
 		struct s_ChainLength Chain;
 		Chain.Nth_max = n+1;
-		Chain.Nth = new std::vector<double> [Chain.Nth_max];
-		ChainLength->push_back(Chain);
+		try
+		{
+			Chain.Nth = new std::vector<double> [Chain.Nth_max];
+		}
+		catch( std::exception const &e)
+		{
+			std::cout << "Exception: " << e.what();
+			std::cout << ". Ran out of memory?" << std::endl;
+			return false;
+		}
+
+		try
+		{
+			ChainLength->push_back(Chain);
+		}
+		catch( std::exception const &e)
+		{
+			std::cout << "Exception: " << e.what();
+			std::cout << ". Ran out of memory?" << std::endl;
+			return false;
+		}
 	}
+
+	return true;
 }
 
 void free_chains(std::vector<struct s_ChainLength> *ChainLength)
@@ -60,6 +83,7 @@ void get_list(std::vector<struct s_ChainLength> *ChainLength,
 {
 	int first = 0;
 	int last = 0;
+
 	for( unsigned int i = 1; i < x->size(); i++)
 	{
 		if ( (x->at(i) == ENDOFCHAINMARKER) &&
@@ -80,7 +104,8 @@ void get_list(std::vector<struct s_ChainLength> *ChainLength,
 				 * make sure ChainLength has enough elements, and
 				 * allocate space for Nth vector.
 				 */
-				alloc_chains(ChainLength, length);
+				if ( !alloc_chains(ChainLength, length) )
+					return;
 
 				for( unsigned int j=0; j < length-1; j++ )
 					for (unsigned int k=j+1; k < length; k++)
@@ -92,7 +117,15 @@ void get_list(std::vector<struct s_ChainLength> *ChainLength,
 						                                y->at(first+k),
 						                                z->at(first+k));
 						// Record Nth nearest neighbor distance. (N=k-j).
-						ChainLength->at(c).Nth[k-j-1].push_back(d);
+						try
+						{
+							ChainLength->at(c).Nth[k-j-1].push_back(d);
+						}
+						catch( std::exception const &e)
+						{
+							std::cout << "Exception: " << e.what();
+							std::cout << ". Ran out of memory?" << std::endl;
+						}
 					}
 				}
 			// done with this chain; set first counter to just past this chain.
@@ -112,8 +145,17 @@ int doAllFrames(char *progname, char *fPrefix, char *fSuffix,
 	 * 1000s of files, so 1000s of elements of 'frame' are possible. 
 	 */
 	std::vector<struct s_frame> frame;
-	// Reserve space for the total number of  frames (files).
-	frame.reserve(last-first+1);
+	// Reserve space for the total number of frames (files).
+	try
+	{
+		frame.reserve(last-first+1);
+	}
+	catch( std::exception const &e)
+	{
+		std::cout << "Exception: " << e.what();
+		std::cout << ". Ran out of memory?" << std::endl;
+		return 1;
+	}
 
 	std::clock_t readingtime=0;
 	std::clock_t processingtime=0;
@@ -138,9 +180,19 @@ int doAllFrames(char *progname, char *fPrefix, char *fSuffix,
 		std::vector<double> Oy;
 		std::vector<double> Oz;
 
-		Ox.reserve(5000);
-		Oy.reserve(5000);
-		Oz.reserve(5000);
+		try
+		{
+			Ox.reserve(5000);
+			Oy.reserve(5000);
+			Oz.reserve(5000);
+		}
+		catch( std::exception const &e)
+		{
+			std::cout << "Exception: " << e.what();
+			std::cout << ". Ran out of memory?" << std::endl;
+			return 1;
+		}
+
 
 		struct s_frame iframe;
 		iframe.num = fidx;
@@ -148,7 +200,17 @@ int doAllFrames(char *progname, char *fPrefix, char *fSuffix,
 		strcpy(iframe.filename, basename((char *)filename.str().c_str()));
 
 		// Reserve space for chains of up to 20 elements long.
-		iframe.ChainLength.reserve(20);
+		try
+		{
+			iframe.ChainLength.reserve(20);
+		}
+		catch( std::exception const &e)
+		{
+			std::cout << "Exception: " << e.what();
+			std::cout << ". Ran out of memory?" << std::endl;
+			return 1;
+		}
+
 		start = std::clock();
 		if( ReadData( filename.str().c_str(), &Ox, &Oy, &Oz ) )
 		{
@@ -164,7 +226,15 @@ int doAllFrames(char *progname, char *fPrefix, char *fSuffix,
 
 		start = std::clock();
 		get_list(&iframe.ChainLength, &Ox, &Oy, &Oz);
-		frame.push_back(iframe);
+		try
+		{
+			frame.push_back(iframe);
+		}
+		catch( std::exception const &e)
+		{
+			std::cout << "Exception: " << e.what();
+			std::cout << ". Ran out of memory?" << std::endl;
+		}
 
 		if ( max_atoms < iframe.ChainLength.size() )
 			max_atoms = iframe.ChainLength.size();
@@ -198,4 +268,4 @@ int doAllFrames(char *progname, char *fPrefix, char *fSuffix,
 
 	return(0);
 }
-// vim:tw=76:ts=4:sw=2
+// vim:tw=76:ts=4:sw=4
