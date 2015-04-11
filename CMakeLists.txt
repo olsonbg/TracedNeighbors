@@ -1,4 +1,11 @@
 cmake_minimum_required (VERSION 2.6)
+message("CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
+
+# This gets prepdended to all CXX_FLAGS_* strings.
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+
+# Use this for debugging with valgrind.
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb")
 
 PROJECT(TracedNeighbors)
 
@@ -17,18 +24,17 @@ configure_file (
 # so that we will find TraceHBondsConfig.h
 include_directories("${PROJECT_BINARY_DIR}")
 
-# Use this for debugging with valgrind.
-#set(CMAKE_CXX_FLAGS "-Wall -O0 -g -ggdb")
-
-# Use this for release.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")
-
 if( CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	message( "Making static binary." )
 	set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc")
 endif()
 
-include(CTest)
 add_subdirectory(src)
-add_subdirectory(test)
+
+option(GTESTS "Compile with gtest unit tests." OFF)
+
+if ( GTESTS )
+	include(CTest)
+	add_subdirectory(test)
+endif( GTESTS )
 
