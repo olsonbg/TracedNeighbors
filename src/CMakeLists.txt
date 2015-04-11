@@ -1,5 +1,13 @@
-ADD_EXECUTABLE(TracedNeighbors TracedNeighbors.cpp ReadData.cpp
-               SimpleMath.cpp Print.cpp main.cpp)
+SET(TNSources TracedNeighbors.cpp ReadData.cpp SimpleMath.cpp Print.cpp main.cpp)
+
+option(TESTOUTOFMEMORY "Simulate out of memory for testing." OFF)
+
+if ( TESTOUTOFMEMORY )
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DTESTOUTOFMEMORY")
+	SET(TNSources ${TNSources} TestOutOfMemory.cpp)
+endif()
+
+ADD_EXECUTABLE(TracedNeighbors ${TNSources})
 
 # Link the executable to a library.
 FIND_PACKAGE( Boost REQUIRED COMPONENTS iostreams REQUIRED )

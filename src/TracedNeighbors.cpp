@@ -10,6 +10,10 @@
 #include "Print.h"
 #include "ReadData.h"
 
+#ifdef TESTOUTOFMEMORY
+extern bool memoryAllocFail;
+#endif
+
 int doAllFrames(char *, char *fprefix, char *fsuffix, int first, int last);
 
 

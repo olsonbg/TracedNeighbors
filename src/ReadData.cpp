@@ -12,6 +12,10 @@
 #include "TracedNeighbors.h"
 #include "ReadData.h"
 
+#ifdef TESTOUTOFMEMORY
+extern bool memoryAllocFail;
+#endif
+
 /*
  * Read atom coordinates of oxygen atoms ([O]) from file, storing x, y, and z
  * in vectors.
