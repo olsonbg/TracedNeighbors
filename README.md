@@ -7,14 +7,14 @@ TracedNeighbors
 ```bash
 $ mkdir build
 $ cd build
-$ cmake ..
+$ cmake -DCMAKE_BUILD_TYPE=release ..
 $ make -j4
 $ src/TraceHBonds
 ```
 
 To cross-compile, use:
 ```bash
-$ cmake -DCMAKE_TOOLCHAIN_FILE=<Toolchain cmake file> ..
+$ cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_TOOLCHAIN_FILE=<Toolchain cmake file> ..
 ```
 
 ## Data file format
@@ -109,7 +109,7 @@ viewing.  **Note**: Only one (1) data file is read, so this table, and
 ### Third Table
 
 The Third table combines all files as in table two, and also all the 'Atoms in
-chain' columns for a complete nearest neighbor table. The third table output
+chain' column for a complete nearest neighbor table. The third table output
 from the [example data](#data-file-format) is shown below, in table format for
 easy viewing.
 
